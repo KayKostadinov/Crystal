@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/player_idle.png-3a7f1e4abfbbaa89eb7941afc5e51adb.stex"
+path="res://.import/spikey_ice_enemy.png-31f8f3268080bd1bee5877dcd82aa321.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/player/player_idle.png"
-dest_files=[ "res://.import/player_idle.png-3a7f1e4abfbbaa89eb7941afc5e51adb.stex" ]
+source_file="res://art/enemies/spikey_ice_enemy.png"
+dest_files=[ "res://.import/spikey_ice_enemy.png-31f8f3268080bd1bee5877dcd82aa321.stex" ]
 
 [params]
 
