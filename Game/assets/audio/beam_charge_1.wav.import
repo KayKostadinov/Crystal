@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/beam_charge_1.wav-a9b4b27e6bb2ac8431c1518c77f28582.sample"
+
+[deps]
+
+source_file="res://assets/audio/beam_charge_1.wav"
+dest_files=[ "res://.import/beam_charge_1.wav-a9b4b27e6bb2ac8431c1518c77f28582.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -152,6 +152,7 @@ func jump_anim():
 	if _velocity.y < 0:
 		if _velocity.x == 0:
 			$playerSprite.play("jump")
+			$AudioStreamPlayer2D.play()
 		else:
 			$playerSprite.play("jump_side")
 	elif !is_on_floor():
