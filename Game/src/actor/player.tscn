@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://art/player/player_idle_4.png" type="Texture" id=1]
 [ext_resource path="res://src/actor/player.gd" type="Script" id=2]
@@ -81,6 +81,31 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4, 16 )
 
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 0.412402, 0.412402, 0.412402, 1, 0.108154, 0.108154, 0.108154, 1 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=10]
+_data = [ Vector2( 0, 0.438874 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
+
+[sub_resource type="ParticlesMaterial" id=12]
+lifetime_randomness = 0.82
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 720.0
+angle_random = 0.48
+scale = 0.4
+scale_random = 0.34
+scale_curve = SubResource( 11 )
+color_ramp = SubResource( 9 )
+
 [node name="player" type="KinematicBody2D"]
 collision_mask = 8
 script = ExtResource( 2 )
@@ -122,4 +147,13 @@ stream = ExtResource( 13 )
 [node name="thruster" parent="." instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 0, 13.3367 )
-frame = 6
+frame = 7
+
+[node name="thrusterParticles" type="Particles2D" parent="thruster"]
+show_behind_parent = true
+amount = 20
+lifetime = 0.2
+randomness = 0.47
+local_coords = false
+process_material = SubResource( 12 )
+texture = ExtResource( 12 )
