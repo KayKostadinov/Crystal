@@ -62,18 +62,22 @@ func get_move_velocity(linear_velocity: Vector2, speed: Vector2, direction: Vect
 	
 	if Input.is_action_just_pressed("double_jump") and can_double_jump():
 		ms.y = -d_jump_speed
+		d_jump_effect()
 		just_d_jumped = true
 	
 	return ms
 
 
 # double jump
-func d_jump() -> Vector2:
+func d_jump_effect():
+	# make node visible
+	get_node("thruster").visible = true
+	# play sound
+	$AudioStreamPlayer2D.play()
+	# disable visibility after timer
+	yield(get_tree().create_timer(.5), "timeout")
+	get_node("thruster").visible = false
 	
-	return Vector2(
-		Input.get_action_strength("move_right") - Input.get_action_strength("move_left"), 
-		-1.0 if can_double_jump() else 1.0
-		)
 
 # is double jump possible
 func can_double_jump() -> bool:
@@ -152,7 +156,6 @@ func jump_anim():
 	if _velocity.y < 0:
 		if _velocity.x == 0:
 			$playerSprite.play("jump")
-			$AudioStreamPlayer2D.play()
 		else:
 			$playerSprite.play("jump_side")
 	elif !is_on_floor():
