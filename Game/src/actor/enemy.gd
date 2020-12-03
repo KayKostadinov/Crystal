@@ -6,10 +6,10 @@ func _ready():
 
 
 func _on_headCollider_body_entered(body):
-	if body.global_position.y > get_node("headCollider").global_position.y :
+	if body.global_position.y > $headCollider.global_position.y :
 		return
-	get_node("CollisionShape2D").disabled = true
-	queue_free()
+	$CollisionShape2D.disabled = true
+	queue_free() #delete node
 
 func _physics_process(delta):
 	_velocity.y += gravity * delta

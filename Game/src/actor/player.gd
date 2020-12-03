@@ -71,12 +71,14 @@ func get_move_velocity(linear_velocity: Vector2, speed: Vector2, direction: Vect
 # double jump
 func d_jump_effect():
 	# make node visible
-	get_node("thruster").visible = true
+	$thruster/thrusterParticles.emitting = true
+	$thruster.visible = true
 	# play sound
 	$AudioStreamPlayer2D.play()
 	# disable visibility after timer
 	yield(get_tree().create_timer(.5), "timeout")
-	get_node("thruster").visible = false
+	$thruster/thrusterParticles.emitting = false
+	$thruster.visible = false
 	
 
 # is double jump possible

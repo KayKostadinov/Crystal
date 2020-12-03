@@ -96,7 +96,7 @@ curve = SubResource( 10 )
 [sub_resource type="ParticlesMaterial" id=12]
 lifetime_randomness = 0.82
 flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
+gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 angle = 720.0
@@ -147,13 +147,13 @@ stream = ExtResource( 13 )
 [node name="thruster" parent="." instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 0, 13.3367 )
-frame = 7
+frame = 9
 
 [node name="thrusterParticles" type="Particles2D" parent="thruster"]
 show_behind_parent = true
-amount = 20
-lifetime = 0.2
-randomness = 0.47
+amount = 10
+lifetime = 0.1
+randomness = 0.2
 local_coords = false
 process_material = SubResource( 12 )
 texture = ExtResource( 12 )
