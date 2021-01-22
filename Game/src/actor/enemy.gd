@@ -5,11 +5,6 @@ func _ready():
 	_velocity.x = -speed.x
 
 
-func _on_headCollider_body_entered(body):
-	if body.global_position.y > $headCollider.global_position.y :
-		return
-	$CollisionShape2D.disabled = true
-	queue_free() #delete node
 
 func _physics_process(delta):
 	_velocity.y += gravity * delta
@@ -18,3 +13,10 @@ func _physics_process(delta):
 	_velocity.y = move_and_slide(_velocity, FLOOR_NORMAL).y
 
 
+func _on_DamageCollider_area_entered(area):
+	if area.name == 'fireball':
+#		health -= area.attack_damage
+		print(area.is_in_group('damaging'))
+	if health <= 0:
+		$CollisionShape2D.disabled = true
+		queue_free() #delete node

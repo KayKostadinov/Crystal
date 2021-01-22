@@ -7,7 +7,7 @@
 extents = Vector2( 5, 28.8602 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.43473, 6.7969 )
+extents = Vector2( 8.43473, 40 )
 
 [node name="enemy" type="KinematicBody2D"]
 collision_layer = 2
@@ -31,12 +31,12 @@ scale = Vector2( 1.32295, 4.06407 )
 process_parent = true
 physics_process_parent = true
 
-[node name="headCollider" type="Area2D" parent="."]
+[node name="DamageCollider" type="Area2D" parent="."]
 modulate = Color( 0.141176, 0, 0.803922, 1 )
 monitorable = false
 collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="headCollider"]
-position = Vector2( 0, -64.406 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageCollider"]
+position = Vector2( 0, -40 )
 shape = SubResource( 2 )
-[connection signal="body_entered" from="headCollider" to="." method="_on_headCollider_body_entered"]
+[connection signal="area_entered" from="DamageCollider" to="." method="_on_DamageCollider_area_entered"]

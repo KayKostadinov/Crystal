@@ -119,10 +119,10 @@ func shoot():
 		ball.position = position
 		ball.position.y -= 25
 		
-		ball.horizontal_speed = 500* -(Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
-		ball.vertical_speed = 500* -(Input.get_action_strength("move_up") - Input.get_action_strength("move_down"))
+		ball.force.x = 500* -(Input.get_action_strength("move_left") - Input.get_action_strength("move_right"))
+		ball.force.y = 500* -(Input.get_action_strength("move_up") - Input.get_action_strength("move_down"))
 		
-		if ball.vertical_speed == 0 and ball.horizontal_speed == 0:
+		if ball.force == Vector2(0,0):
 			return
 			
 		

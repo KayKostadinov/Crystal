@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/actor/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/tileset.png" type="Texture" id=2]
 [ext_resource path="res://src/actor/enemy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/light.png" type="Texture" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 80, 0, 80, 80, 0, 80 )
@@ -30,7 +31,13 @@ points = PoolVector2Array( 0, 0, 80, 0, 80, 80, 0, 80 )
 } ]
 0/z_index = 0
 
+[sub_resource type="OccluderPolygon2D" id=3]
+polygon = PoolVector2Array( 1, 77, 11, 77, 11, 105, 0, 106 )
+
 [node name="levelTemplate" type="Node2D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.254902, 0.254902, 0.254902, 0.560784 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
@@ -41,10 +48,27 @@ format = 1
 tile_data = PoolIntArray( 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65548, 0, 0, 131072, 0, 0, 131076, 0, 0, 131081, 0, 0, 131083, 0, 0, 131084, 0, 0, 131090, 0, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 196608, 0, 0, 196620, 0, 0, 196625, 0, 0, 196626, 0, 0, 262144, 0, 0, 262149, 0, 0, 262150, 0, 0, 262154, 0, 0, 262156, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 327680, 0, 0, 327684, 0, 0, 327688, 0, 0, 393216, 0, 0, 393223, 0, 0, 393224, 0, 0, 393227, 0, 0, 393228, 0, 0, 393238, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0, 458765, 0, 0, 458766, 0, 0, 458767, 0, 0, 458768, 0, 0, 458769, 0, 0, 458770, 0, 0, 458771, 0, 0, 458772, 0, 0, 458773, 0, 0, 458774, 0, 0 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 206, 192 )
+position = Vector2( 202, 553 )
+
+[node name="Light2D" type="Light2D" parent="player"]
+position = Vector2( 0, -16 )
+texture = ExtResource( 4 )
+texture_scale = 2.84
+color = Color( 1, 0.164706, 0, 1 )
+range_item_cull_mask = -2147483647
+shadow_enabled = true
+shadow_color = Color( 0.0588235, 0.0588235, 0.0588235, 0.278431 )
 
 [node name="enemy" parent="." instance=ExtResource( 3 )]
-position = Vector2( 769, 348 )
+position = Vector2( 757, 537 )
+
+[node name="Light2D" type="Light2D" parent="enemy"]
+texture = ExtResource( 4 )
+color = Color( 0, 0.647059, 1, 1 )
 
 [node name="enemy2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1511, 430 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2( 275, 456 )
+occluder = SubResource( 3 )

@@ -15,37 +15,7 @@
 [ext_resource path="res://assets/audio/explosion_burst.wav" type="AudioStream" id=13]
 [ext_resource path="res://src/fireball/thruster.tscn" type="PackedScene" id=14]
 
-[sub_resource type="Gradient" id=1]
-colors = PoolColorArray( 0.871181, 0.407908, 0, 1, 0.656338, 0, 0, 1 )
-
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Gradient" id=3]
-colors = PoolColorArray( 1, 0, 0, 1, 1, 0.776367, 0, 1 )
-
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-lifetime_randomness = 1.0
-trail_color_modifier = SubResource( 4 )
-emission_shape = 1
-emission_sphere_radius = 1.0
-flag_disable_z = true
-spread = 5.0
-gravity = Vector3( 0, -60, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-linear_accel = -15.69
-linear_accel_random = 1.0
-angle = 720.0
-angle_random = 1.0
-scale = 0.01
-scale_random = 0.28
-color_ramp = SubResource( 2 )
-
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 1 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ), ExtResource( 5 ) ],
 "loop": true,
@@ -62,11 +32,6 @@ animations = [ {
 "name": "fall",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "fall_side",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 11 ) ],
 "loop": true,
 "name": "jump",
@@ -76,10 +41,48 @@ animations = [ {
 "loop": true,
 "name": "jump_side",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "fall_side",
+"speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=7]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 16 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 0.871181, 0.407908, 0, 1, 0.656338, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Gradient" id=5]
+colors = PoolColorArray( 1, 0, 0, 1, 1, 0.776367, 0, 1 )
+
+[sub_resource type="GradientTexture" id=6]
+gradient = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=7]
+lifetime_randomness = 1.0
+trail_color_modifier = SubResource( 6 )
+emission_shape = 1
+emission_sphere_radius = 1.0
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = -15.69
+linear_accel_random = 1.0
+radial_accel = 57.52
+radial_accel_random = 0.18
+angle = 720.0
+angle_random = 1.0
+scale = 0.01
+scale_random = 0.28
+color_ramp = SubResource( 4 )
 
 [sub_resource type="Gradient" id=8]
 colors = PoolColorArray( 0.412402, 0.412402, 0.412402, 1, 0.108154, 0.108154, 0.108154, 1 )
@@ -113,7 +116,23 @@ gravity = 1250.0
 speed = Vector2( 200, 650 )
 d_jump_speed = 600
 
+[node name="playerSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0.0945892, -20 )
+scale = Vector2( 0.15812, 0.15812 )
+frames = SubResource( 1 )
+animation = "jump"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -16 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 0, -100 )
+current = true
+smoothing_enabled = true
+
 [node name="Particles2D" type="Particles2D" parent="."]
+show_behind_parent = true
 position = Vector2( 0, -34 )
 amount = 20
 lifetime = 0.5
@@ -122,24 +141,8 @@ explosiveness = 0.08
 randomness = 1.0
 local_coords = false
 draw_order = 1
-process_material = SubResource( 5 )
+process_material = SubResource( 7 )
 texture = ExtResource( 12 )
-
-[node name="playerSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0.0945892, -20 )
-scale = Vector2( 0.15812, 0.15812 )
-frames = SubResource( 6 )
-animation = "jump"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -16 )
-shape = SubResource( 7 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 0, -100 )
-current = true
-zoom = Vector2( 0.9, 0.9 )
-smoothing_enabled = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
@@ -147,7 +150,7 @@ stream = ExtResource( 13 )
 [node name="thruster" parent="." instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 0, 13.3367 )
-frame = 9
+frame = 2
 
 [node name="thrusterParticles" type="Particles2D" parent="thruster"]
 show_behind_parent = true
